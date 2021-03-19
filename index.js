@@ -7,7 +7,7 @@ async function sincronizar() {
 }
 
 async function inserir() {
-  await Cliente.create({nome:"José", sobrenome:"Lucena", contato:"40028922", senha:"senha123"});
+  await Cliente.create({nome:"Brenno", sobrenome:"Guedes", contato:"99064946", senha:"password123"});
 }
 
 async function consultar() {
@@ -16,5 +16,5 @@ async function consultar() {
 }
 
 // sincronizar();
-// inserir();
- consultar();
+inserir();
+consultar();
