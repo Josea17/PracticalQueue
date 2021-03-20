@@ -27,4 +27,6 @@ const Estabelecimento = db.define("Estabelecimento",
     }
 );
 
+
+
 module.exports = Estabelecimento;

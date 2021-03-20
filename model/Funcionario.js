@@ -27,8 +27,33 @@ const Funcionario = db.define("Funcionario",
         senha:{
             type: DataTypes.STRING,
             allowNull: false
+        },
+        EstabelecimentoId: {
+            type: DataTypes.INTEGER,
+            references: {
+                model: Estabelecimento, 
+                key: 'id'
+            },
+            FilaId: {
+            type: DataTypes.INTEGER,
+            references: {
+                model: Fila, 
+                key: 'id'
+            }
+        }
         }
     }
 );
+
+//relacionamento entre funcionario e estabelecimento - 1 para n
+Funcionario.belongsTo(Estabelecimento);
+Estabelecimento.hasMany(Funcionario, {as:"funcionarios"});
+
+//relacionamento entre funcionario e estabelecimento - 1 para n DUVIDA
+Funcionario.belongsTo(Fila);
+Fila.hasMany(Funcionario, {as:"funcionarios"});
+
+//relacionamento entre funcionario e cliente - 1 para 1
+Funcionario.belongsTo(cliente);
 
 module.exports = Funcionario;

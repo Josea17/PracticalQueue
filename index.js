@@ -1,20 +1,24 @@
 const Sequelize = require("sequelize");
 const db = require("./db");
 const Cliente = require("./model/Cliente");
+const Estabelecimento = require("./model/Estabelecimento");
+const Funcionario = require("./model/Funcionario");
+const Fila = require("./model/Fila");
 
 async function sincronizar() {
   await db.sync();
 }
 
 async function inserir() {
-  await Cliente.create({nome:"Brenno", sobrenome:"Guedes", contato:"99064946", senha:"password123"});
+  await Fila.create({nome:"Fila do barbeiro", qntDeClientes: "10", tempo:"03:45:00", responsavel:"Fulano"});
 }
 
 async function consultar() {
-  const cl = await Cliente.findAll();
+  const cl = await Fila.findAll();
   console.log(cl);
 }
 
-// sincronizar();
-inserir();
+//sincronizar();
+//inserir();
 consultar();
+
