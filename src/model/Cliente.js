@@ -1,6 +1,7 @@
 const {Sequelize, DataTypes} = require("sequelize");
 const db = require("../db");
-
+const Funcionario = require("./Funcionario");
+const Estabelecimento = require("./Estabelecimento");
 
 const Cliente = db.define("Cliente",
     {
@@ -31,6 +32,6 @@ const Cliente = db.define("Cliente",
 
 
 //relacionamento entre funcionario e cliente - 1 para 1
-Cliente.belongsTo(funcionario);
+Cliente.belongsTo(Funcionario);
 
 module.exports = Cliente;

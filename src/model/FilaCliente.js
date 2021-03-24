@@ -26,5 +26,6 @@ const FilaCliente = db.define("FilaCliente",
 );
 
 Fila.belongsToMany(Cliente, {through:FilaCliente});
-Cliente.belongsToMany(Fila, {through:FilaCliente})
+Cliente.belongsToMany(Fila, {through:FilaCliente});
+
 module.exports = FilaCliente;

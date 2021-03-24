@@ -1,5 +1,8 @@
 const {Sequelize, DataTypes} = require("sequelize");
 const db = require("../db");
+const Estabelecimento = require("./Estabelecimento");
+const Fila = require("./Fila");
+const Cliente = require("./Cliente");
 
 const Funcionario = db.define("Funcionario",
     {
@@ -40,20 +43,27 @@ const Funcionario = db.define("Funcionario",
                 model: Fila, 
                 key: 'id'
             }
+        },
+         ClienteId: {
+            type: DataTypes.INTEGER,
+            references: {
+                model: Cliente, 
+                key: 'id'
+            }
         }
         }
     }
 );
 
-//relacionamento entre funcionario e estabelecimento - 1 para n
+//relacionamento entre funcionario e estabelecimento - n para 1
 Funcionario.belongsTo(Estabelecimento);
 Estabelecimento.hasMany(Funcionario, {as:"funcionarios"});
 
-//relacionamento entre funcionario e estabelecimento - 1 para n DUVIDA
+//relacionamento entre funcionario e fila - n para 1
 Funcionario.belongsTo(Fila);
 Fila.hasMany(Funcionario, {as:"funcionarios"});
 
 //relacionamento entre funcionario e cliente - 1 para 1
-Funcionario.belongsTo(cliente);
+//Funcionario.belongsTo(Cliente);
 
 module.exports = Funcionario;
