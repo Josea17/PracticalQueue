@@ -3,6 +3,7 @@ const db = require("../db");
 const Fila = require("./Fila");
 const Cliente = require("./Cliente");
 
+
 const FilaCliente = db.define("FilaCliente",
     {
         ClienteId: {

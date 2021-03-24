@@ -1,12 +1,14 @@
+require('dotenv').config()
 const Sequelize = require("sequelize");
 const db = require("./db");
 const Cliente = require("./model/Cliente");
 const Estabelecimento = require("./model/Estabelecimento");
 const Funcionario = require("./model/Funcionario");
 const Fila = require("./model/Fila");
+const FilaCliente = require("./model/FilaCliente");
 
 async function sincronizar() {
-  await db.sync();
+  await db.sync({force:true});
 }
 
 async function inserir() {
@@ -23,8 +25,6 @@ async function inserir() {
     Fila.create({nome:"Fila da farmacia", principalId: estabelecimento.id}); 
     
 }
-
-
 
 async function consultar() {
   const cl = await Fila.findAll();

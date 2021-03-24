@@ -18,6 +18,10 @@ const Cliente = db.define("Cliente",
             type: DataTypes.STRING,
             allowNull: false
         },
+        email:{
+            type: DataTypes.STRING,
+            allowNull: false
+        },
         contato:{
             type: DataTypes.INTEGER,
             allowNull: false
