@@ -16,11 +16,11 @@ const Fila = db.define("Fila",
         },
         qntDeClientes:{
             type: DataTypes.INTEGER,
-            allowNull: false
+            allowNull: true
         },
         tempo:{
             type: DataTypes.TIME,
-            allowNull: false
+            allowNull: true
         },
         responsavel:{
             type: DataTypes.STRING,

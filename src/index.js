@@ -36,6 +36,7 @@ Route("/fila",app, new Service(Fila));
 Route("/filacliente",app, new Service(FilaCliente));
 Route("/funcionario",app, new Service(Funcionario));
 
+/*
 app.get("/livro/:id/edicao", async (req, res) => {
   const edicoes = await Edicao.findAll({where:{LivroId:req.params.id}});
   res.send({edicoes});
@@ -51,11 +52,8 @@ app.get("/livro/:id/disciplina", async (req, res) => {
     }
   );
   res.send(disciplinas)
-
 }) 
-
-
-
+*/
 app.listen(process.env.PORT, () => {
   console.log(`Servidor escutando na porta ${process.env.PORT}`);
 })
