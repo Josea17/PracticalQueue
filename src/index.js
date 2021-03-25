@@ -61,3 +61,5 @@ async function sincronizar() {
 app.listen(process.env.PORT, () => {
   console.log(`Servidor escutando na porta ${process.env.PORT}`);
 })
+
+sincronizar();
