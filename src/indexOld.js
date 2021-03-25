@@ -8,7 +8,7 @@ const Fila = require("./model/Fila");
 const FilaCliente = require("./model/FilaCliente");
 
 async function sincronizar() {
-  await db.sync({});
+  await Fila.sync({force: True});
 }
 
 async function inserir() {

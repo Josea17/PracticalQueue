@@ -54,6 +54,10 @@ app.get("/livro/:id/disciplina", async (req, res) => {
   res.send(disciplinas)
 }) 
 */
+async function sincronizar() {
+  await Fila.sync({force: True});
+}
+
 app.listen(process.env.PORT, () => {
   console.log(`Servidor escutando na porta ${process.env.PORT}`);
 })
