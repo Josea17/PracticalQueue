@@ -33,8 +33,6 @@ const Cliente = db.define("Cliente",
     }
 );
 
-
-
 //relacionamento entre funcionario e cliente - 1 para 1
 Cliente.belongsTo(Funcionario);
 

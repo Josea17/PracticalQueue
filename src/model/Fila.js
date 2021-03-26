@@ -32,7 +32,7 @@ const Fila = db.define("Fila",
                 model: Estabelecimento, 
                 key: 'id'
             }
-        },
+        }
     }
 );
 

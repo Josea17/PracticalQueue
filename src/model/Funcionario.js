@@ -32,26 +32,26 @@ const Funcionario = db.define("Funcionario",
             allowNull: false
         },
         EstabelecimentoId: {
-            type: DataTypes.INTEGER,
-            references: {
-                model: Estabelecimento, 
-                key: 'id'
+          type: DataTypes.INTEGER,
+          references: {
+            model: Estabelecimento, 
+            key: 'id'
             },
             FilaId: {
-            type: DataTypes.INTEGER,
-            references: {
+              type: DataTypes.INTEGER,
+              references: {
                 model: Fila, 
                 key: 'id'
-            }
-        },
-         ClienteId: {
-            type: DataTypes.INTEGER,
-            references: {
+                }
+              },
+            ClienteId: {
+              type: DataTypes.INTEGER,
+              references: {
                 model: Cliente, 
                 key: 'id'
-            }
-        }
-        }
+                }
+              }
+          }
     }
 );
 
