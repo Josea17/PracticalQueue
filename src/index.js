@@ -10,6 +10,11 @@ const Fila = require('./model/Fila');
 const FilaCliente = require('./model/FilaCliente');
 const Funcionario = require('./model/Funcionario');
 
+const bcryptjs = require("bcryptjs");
+const Usuario = require('./model/Usuario');
+const jwt = require("jsonwebtoken");
+const authorization = require("./authorization")
+
 const app = express();
 
 app.use(cors());
@@ -30,13 +35,13 @@ app.get("/livro/:id", async (req, res) => {
 });
 */
 
-Route("/cliente",app, new Service(Cliente));
-Route("/estabelecimento",app, new Service(Estabelecimento));
-Route("/fila",app, new Service(Fila));
-Route("/filacliente",app, new Service(FilaCliente));
-Route("/funcionario",app, new Service(Funcionario));
+Route("/cliente",app, new Service(Cliente), authorization);
+Route("/estabelecimento",app, new Service(Estabelecimento), authorization);
+Route("/fila",app, new Service(Fila), authorization);
+Route("/filacliente",app, new Service(FilaCliente), authorization);
+Route("/funcionario",app, new Service(Funcionario), authorization);
 
-/*
+
 app.get("/livro/:id/edicao", async (req, res) => {
   const edicoes = await Edicao.findAll({where:{LivroId:req.params.id}});
   res.send({edicoes});
@@ -53,7 +58,35 @@ app.get("/livro/:id/disciplina", async (req, res) => {
   );
   res.send(disciplinas)
 }) 
-*/
+
+async function gerarHash(password) {
+  return await bcryptjs.hash(password, 10)
+}
+
+app.post("/cadastrar", async (req, res) => {
+  const {email, password} = req.body;
+  const u = await Usuario.create({email, password:(await gerarHash(password))});
+  u.password = undefined;
+  res.send(u);
+})
+
+app.post("/autenticar", async (req, res) => {
+  const {email, password} = req.body;
+  const usu = await Usuario.findByPk(email);
+  if(!usu || !password) {
+    res.status(400).send("Credenciais inválidas");
+  } else if(bcryptjs.compareSync(password, usu.password)){
+    const token = jwt.sign(
+      {email},
+      process.env.SECRET,
+      {expiresIn:3600}
+    );
+    res.send({email, token})
+  } else {
+    res.status(400).send("Credenciais inválidas")
+  }
+})
+
 async function sincronizar() {
   await Fila.sync({force: True});
 }
@@ -62,4 +95,4 @@ app.listen(process.env.PORT, () => {
   console.log(`Servidor escutando na porta ${process.env.PORT}`);
 })
 
-sincronizar();
+//sincronizar();
